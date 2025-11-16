@@ -1,187 +1,192 @@
-// scripts.js — starfield, planet interactions, and page transitions
-(function(){
-  const canvas = document.getElementById('starfield');
-  const ctx = canvas && canvas.getContext && canvas.getContext('2d');
-  let stars = [];
+// cosmic.js — Parallax, scroll animations, canvas cosmos
 
-  function resize(){
-    if(!canvas) return;
-    canvas.width = innerWidth * devicePixelRatio;
-    canvas.height = innerHeight * devicePixelRatio;
-    canvas.style.width = innerWidth + 'px';
-    canvas.style.height = innerHeight + 'px';
-    ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+(function() {
+  'use strict';
+
+  // ============================================================
+  // COSMOS CANVAS BACKGROUND
+  // ============================================================
+
+  const canvas = document.getElementById('cosmos');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth * devicePixelRatio;
+    canvas.height = window.innerHeight * devicePixelRatio;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
   }
 
-  function initStars(){
+  function initStars() {
     stars = [];
-    const count = Math.floor((innerWidth+innerHeight)/10);
-    for(let i=0;i<count;i++){
+    const count = Math.floor((window.innerWidth + window.innerHeight) / 8);
+    for (let i = 0; i < count; i++) {
       stars.push({
-        x: Math.random()*innerWidth,
-        y: Math.random()*innerHeight,
-        r: Math.random()*1.5+0.2,
-        alpha: Math.random(),
-        twinkle: Math.random()*0.02+0.005
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.5 + 0.3,
+        alpha: Math.random() * 0.6 + 0.3,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
       });
     }
   }
 
-  function drawStars(){
-    if(!ctx) return;
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    for(const s of stars){
-      s.alpha += (Math.random()-0.5)*s.twinkle;
-      if(s.alpha<0) s.alpha=0; if(s.alpha>1) s.alpha=1;
+  function drawStars() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    for (const star of stars) {
+      star.alpha += (Math.random() - 0.5) * star.twinkleSpeed;
+      star.alpha = Math.max(0.1, Math.min(1, star.alpha));
+
       ctx.beginPath();
-      ctx.fillStyle = `rgba(255,255,255,${s.alpha*0.9})`;
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+      ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw glow
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(0, 245, 255, ${star.alpha * 0.3})`;
+      ctx.arc(star.x, star.y, star.r + 1.5, 0, Math.PI * 2);
       ctx.fill();
     }
   }
 
-  function animate(){
+  function animateCosmos() {
     drawStars();
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animateCosmos);
   }
 
-  function setup(){
-    if(!canvas || !ctx) return;
-    resize();
+  function setupCosmos() {
+    resizeCanvas();
     initStars();
-    animate();
+    animateCosmos();
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initStars();
+    });
   }
 
-  addEventListener('resize', ()=>{ resize(); initStars(); });
+  // ============================================================
+  // SCROLL REVEAL ANIMATIONS
+  // ============================================================
 
-  // planet interactions
-  function setupPlanets(){
-    const planets = document.querySelectorAll('.planet');
-    planets.forEach(p=>{
-      // position from inline styles --x and --y
-      const x = p.style.getPropertyValue('--x') || '50%';
-      const y = p.style.getPropertyValue('--y') || '50%';
-      p.style.left = x;
-      p.style.top = y;
-      // set size
-      const size = getComputedStyle(p).getPropertyValue('--size') || '100px';
-      const core = p.querySelector('.planet-core');
-      if(core) core.style.width = core.style.height = size;
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px',
+  };
 
-      // parallax on mouse move
-      p.addEventListener('mousemove', (ev)=>{
-        const rect = p.getBoundingClientRect();
-        const cx = rect.left + rect.width/2;
-        const cy = rect.top + rect.height/2;
-        const dx = (ev.clientX - cx)/rect.width;
-        const dy = (ev.clientY - cy)/rect.height;
-        p.style.transform = `translate(-50%,-50%) rotateX(${dy*8}deg) rotateY(${dx*8}deg) translateZ(0)`;
-      });
-      p.addEventListener('mouseleave', ()=>{ p.style.transform='translate(-50%,-50%)'; });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
 
-      // click to navigate with exit animation
-      p.addEventListener('click', (ev)=>{
-        const target = p.getAttribute('data-target');
-        if(!target) return;
-        // create overlay at click position and expand to cover screen
-        const overlay = document.createElement('div');
-        overlay.className = 'nav-overlay';
-        document.body.appendChild(overlay);
-        const rect = p.getBoundingClientRect();
-        const cx = rect.left + rect.width/2;
-        const cy = rect.top + rect.height/2;
-        overlay.style.left = cx + 'px';
-        overlay.style.top = cy + 'px';
-        // force reflow then open
-        requestAnimationFrame(()=> overlay.classList.add('open'));
-        // navigate after overlay expands
-        setTimeout(()=>{ location.href = target; }, 600);
+  function setupScrollReveal() {
+    document.querySelectorAll('.reveal').forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.9, 0.2, 1)';
+      observer.observe(el);
+    });
+  }
+
+  // ============================================================
+  // PARALLAX SCROLL EFFECT
+  // ============================================================
+
+  function setupParallax() {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('[data-parallax]');
+
+      parallaxElements.forEach((el) => {
+        const speed = parseFloat(el.dataset.parallax) || 0.5;
+        el.style.transform = `translateY(${scrolled * speed}px)`;
       });
     });
   }
 
-  // particle emitters for each planet to create aura/particles
-  function startPlanetEmitters(){
-    const planets = document.querySelectorAll('.planet');
-    planets.forEach(p=>{
-      // small emitter interval
-      const interval = Math.random()*900 + 500;
-      setInterval(()=>{
-        emitParticle(p);
-      }, interval);
+  // ============================================================
+  // SMOOTH MOUSE PARALLAX FOR PLANETS
+  // ============================================================
+
+  function setupMouseParallax() {
+    const planets = document.querySelectorAll('.planet-float');
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+
+      planets.forEach((planet, index) => {
+        const offset = (index + 1) * 3;
+        planet.style.transform = `translate(${mouseX * offset}px, ${mouseY * offset}px)`;
+      });
     });
   }
 
-  function emitParticle(planet){
-    const rect = planet.getBoundingClientRect();
-    const core = planet.querySelector('.planet-core');
-    const centerX = rect.left + rect.width/2;
-    const centerY = rect.top + rect.height/2;
-    const particle = document.createElement('div');
-    particle.className = 'planet-particle';
-    document.body.appendChild(particle);
-    // random direction and distance
-    const angle = Math.random()*Math.PI*2;
-    const dist = (rect.width * 0.8) + Math.random()*80;
-    const tx = Math.cos(angle)*dist;
-    const ty = Math.sin(angle)*dist;
-    particle.style.left = (centerX - 3) + 'px';
-    particle.style.top = (centerY - 3) + 'px';
-    particle.style.setProperty('--tx', tx + 'px');
-    particle.style.setProperty('--ty', ty + 'px');
-    const dur = Math.random()*700 + 900;
-    particle.style.animation = `particle-fly ${dur}ms cubic-bezier(.2,.9,.2,1)`;
-    // remove after animation
-    particle.addEventListener('animationend', ()=> particle.remove());
+  // ============================================================
+  // FORM SUBMISSION (Demo)
+  // ============================================================
+
+  function setupForm() {
+    const form = document.querySelector('.contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for reaching out! (This is a demo form)');
+      form.reset();
+    });
   }
 
-  // For content pages: page enter animation and intercept links for exit
-  function setupPageTransitions(){
-    const container = document.querySelector('.content');
-    if(container){
-      container.classList.add('page-enter');
-      requestAnimationFrame(()=>{
-        container.classList.add('page-enter-active');
-      });
+  // ============================================================
+  // ACTIVE NAV LINK ON SCROLL
+  // ============================================================
 
-      // intercept internal links to play exit animation
-      document.addEventListener('click', (e)=>{
-        const a = e.target.closest('a');
-        if(!a) return;
-        const href = a.getAttribute('href');
-        if(!href) return;
-        // only intercept local navigations
-        if(href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) return;
-        e.preventDefault();
-        container.classList.remove('page-enter-active');
-        container.classList.add('page-exit-active');
-        setTimeout(()=>{ location.href = href; }, 420);
+  function setupActiveNav() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 100;
+
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+          const section = document.querySelector(href);
+          if (section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+              navLinks.forEach((l) => l.style.color = 'var(--text-secondary)');
+              link.style.color = 'var(--accent-cyan)';
+            }
+          }
+        }
       });
-    }
+    });
   }
 
-  // init all
-  document.addEventListener('DOMContentLoaded', ()=>{
-    setup();
-    setupPlanets();
-    setupPageTransitions();
-    // reveal elements sequentially
-    revealSequentially();
-    // start emitters after DOM ready
-    startPlanetEmitters();
+  // ============================================================
+  // INIT ALL ON DOM READY
+  // ============================================================
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setupCosmos();
+    setupScrollReveal();
+    setupParallax();
+    setupMouseParallax();
+    setupForm();
+    setupActiveNav();
   });
-
-  function revealSequentially(){
-    const groups = document.querySelectorAll('.reveal-group');
-    groups.forEach(group=>{
-      const items = Array.from(group.querySelectorAll('.reveal'));
-      items.forEach((el, i)=>{
-        setTimeout(()=> el.classList.add('visible'), 110 * i);
-      });
-    });
-    // also reveal any single elements marked .reveal
-    const singles = document.querySelectorAll(':scope > .reveal');
-    singles.forEach((el,i)=> setTimeout(()=> el.classList.add('visible'), 120*i));
-  }
-
 })();
