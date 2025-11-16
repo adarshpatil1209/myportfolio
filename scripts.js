@@ -80,14 +80,22 @@
       p.addEventListener('mouseleave', ()=>{ p.style.transform='translate(-50%,-50%)'; });
 
       // click to navigate with exit animation
-      p.addEventListener('click', ()=>{
+      p.addEventListener('click', (ev)=>{
         const target = p.getAttribute('data-target');
         if(!target) return;
-        // create a fade overlay
-        document.documentElement.classList.add('navigating');
-        // subtle scale effect
-        p.classList.add('planet-opening');
-        setTimeout(()=>{ location.href = target; }, 450);
+        // create overlay at click position and expand to cover screen
+        const overlay = document.createElement('div');
+        overlay.className = 'nav-overlay';
+        document.body.appendChild(overlay);
+        const rect = p.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+        overlay.style.left = cx + 'px';
+        overlay.style.top = cy + 'px';
+        // force reflow then open
+        requestAnimationFrame(()=> overlay.classList.add('open'));
+        // navigate after overlay expands
+        setTimeout(()=>{ location.href = target; }, 600);
       });
     });
   }
@@ -122,6 +130,21 @@
     setup();
     setupPlanets();
     setupPageTransitions();
+    // reveal elements sequentially
+    revealSequentially();
   });
+
+  function revealSequentially(){
+    const groups = document.querySelectorAll('.reveal-group');
+    groups.forEach(group=>{
+      const items = Array.from(group.querySelectorAll('.reveal'));
+      items.forEach((el, i)=>{
+        setTimeout(()=> el.classList.add('visible'), 110 * i);
+      });
+    });
+    // also reveal any single elements marked .reveal
+    const singles = document.querySelectorAll(':scope > .reveal');
+    singles.forEach((el,i)=> setTimeout(()=> el.classList.add('visible'), 120*i));
+  }
 
 })();

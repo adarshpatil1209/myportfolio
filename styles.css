@@ -26,6 +26,15 @@ body{margin:0;font-family:'Inter',system-ui, -apple-system, 'Segoe UI', Roboto, 
 .planet-label{margin-top:.6rem;text-align:center;color:var(--muted);font-size:.9rem}
 .planet:hover{transform:translate(-50%,-50%) scale(1.08)}
 
+/* planet icon image */
+.planet-icon{width:70%;height:70%;display:block;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.6));transition:transform .35s ease}
+.planet-core{display:flex;align-items:center;justify-content:center;overflow:visible}
+.planet:hover .planet-icon{transform:scale(1.06) rotate(-4deg)}
+
+/* subtle floating motion for planets */
+@keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+.planet .planet-core{animation:floaty 6s ease-in-out infinite}
+
 .ui-footer{color:var(--muted);margin-top:1.2rem}
 
 /* Page enter/exit animations for content pages */
@@ -50,3 +59,17 @@ body{margin:0;font-family:'Inter',system-ui, -apple-system, 'Segoe UI', Roboto, 
   .planets{height:55vh}
   .ui-header .title{font-size:1.6rem}
 }
+
+/* reveal animations for sequential text */
+.reveal{opacity:0;transform:translateX(18px)}
+.reveal.visible{opacity:1;transform:translateX(0);transition:all .55s cubic-bezier(.2,.9,.2,1)}
+
+/* overlay expand effect when navigating */
+.nav-overlay{position:fixed;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--accent);z-index:9999;pointer-events:none;transform:translate(-50%,-50%) scale(0);opacity:0}
+.nav-overlay.open{opacity:1;transform:translate(-50%,-50%) scale(80);transition:transform .55s cubic-bezier(.2,.9,.2,1),opacity .15s}
+
+/* page-icon for content pages */
+.page-icon{width:52px;height:52px;vertical-align:middle;margin-right:10px;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.6))}
+
+/* stronger AMOLED blacks */
+body{background:linear-gradient(180deg,var(--bg),#000 70%)}
