@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adarsh Patil — Universe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="dark">
+    <canvas id="starfield"></canvas>
+
+    <main id="universe">
+      <header class="ui-header">
+        <div class="title">Adarsh Patil</div>
+        <div class="subtitle">B.Tech (FY) • CSE - AIML</div>
+      </header>
+
+      <section class="planets" id="planets">
+        <!-- Planets are clickable elements representing pages -->
+        <div class="planet" data-target="portfolio.html" style="--size:120px; --x:25%; --y:40%;"> 
+          <div class="planet-core">
+            <img class="planet-icon" src="images/planet-terra.jpg" alt="Terra">
+          </div>
+          <div class="planet-label">Terra (About)</div>
+        </div>
+
+        <div class="planet" data-target="projects.html" style="--size:110px; --x:60%; --y:28%;">
+          <div class="planet-core">
+            <img class="planet-icon" src="images/planet-astra.jpg" alt="Astra">
+          </div>
+          <div class="planet-label">Astra (Projects)</div>
+        </div>
+
+        <div class="planet" data-target="education.html" style="--size:90px; --x:78%; --y:62%;">
+          <div class="planet-core">
+            <img class="planet-icon" src="images/planet-lumen.jpg" alt="Lumen">
+          </div>
+          <div class="planet-label">Lumen (Education)</div>
+        </div>
+
+        <div class="planet" data-target="contact.html" style="--size:100px; --x:36%; --y:72%;">
+          <div class="planet-core">
+            <img class="planet-icon" src="images/planet-echo.jpg" alt="Echo">
+          </div>
+          <div class="planet-label">Echo (Contact)</div>
+        </div>
+      </section>
+
+      <footer class="ui-footer">Click a planet to open that page — enjoy the transitions ✨</footer>
+    </main>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
