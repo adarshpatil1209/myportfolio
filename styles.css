@@ -1,17 +1,19 @@
-/* Use the same polished, softened cosmic theme as cosmic.css */
+/* ============================================================
+   COSMIC PORTFOLIO — PREMIUM DARK SPACE THEME
+   ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap');
 
 :root {
-  --bg-primary: #000409; /* deep but not flat black */
-  --bg-secondary: #060714;
-  --accent-cyan: #64e6d8; /* softened cyan */
-  --accent-violet: #6e7aa3; /* muted violet/indigo */
-  --accent-green: #79dabb; /* soft green */
-  --text-primary: #e6eef8; /* soft off-white for primary text */
-  --text-secondary: #93a6b3; /* calm secondary */
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-hover: rgba(255, 255, 255, 0.05);
+  --bg-primary: #000000;
+  --bg-secondary: #05050f;
+  --accent-cyan: #00f5ff;
+  --accent-violet: #9c4aff;
+  --accent-green: #5af7b0;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-hover: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -78,9 +80,12 @@ body::before {
 
 .nav-brand {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-links {
@@ -158,21 +163,24 @@ body::before {
 
 .hero-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 3.2rem;
+  font-size: 4rem;
   font-weight: 800;
-  color: var(--text-primary);
-  text-shadow: none;
-  margin-bottom: 0.8rem;
-  line-height: 1.08;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet), var(--accent-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+  margin-bottom: 1rem;
+  line-height: 1.1;
 }
 
 .hero-subtitle {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  color: var(--accent-cyan);
+  margin-bottom: 1rem;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .hero-desc {
@@ -217,11 +225,11 @@ body::before {
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
   color: var(--bg-primary);
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.12);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.18);
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.6), 0 0 60px rgba(156, 74, 255, 0.4);
   transform: translateY(-2px);
 }
 
@@ -234,7 +242,7 @@ body::before {
 .btn-secondary:hover {
   background: var(--accent-violet);
   color: var(--bg-primary);
-  box-shadow: 0 0 18px rgba(110,122,163,0.12);
+  box-shadow: 0 0 30px rgba(156, 74, 255, 0.5);
   transform: translateY(-2px);
 }
 
@@ -259,7 +267,7 @@ body::before {
 .planet-float {
   position: absolute;
   border-radius: 50%;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.2);
   animation: float 6s ease-in-out infinite;
 }
 
@@ -274,6 +282,7 @@ body::before {
   top: 20px;
   right: 0;
   animation-delay: 0s;
+  box-shadow: 0 0 60px rgba(0, 245, 255, 0.4), inset 0 0 40px rgba(0, 245, 255, 0.1);
 }
 
 .planet-2 {
@@ -282,6 +291,7 @@ body::before {
   bottom: 80px;
   right: 200px;
   animation-delay: 1s;
+  box-shadow: 0 0 50px rgba(156, 74, 255, 0.3), inset 0 0 30px rgba(156, 74, 255, 0.1);
 }
 
 .planet-3 {
@@ -290,6 +300,7 @@ body::before {
   bottom: 200px;
   right: 450px;
   animation-delay: 2s;
+  box-shadow: 0 0 40px rgba(90, 247, 176, 0.3), inset 0 0 20px rgba(90, 247, 176, 0.1);
 }
 
 /* ============================================================
@@ -310,20 +321,22 @@ section {
 
 .section-title h2 {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.6rem;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+  margin-bottom: 1rem;
 }
 
 .section-title::after {
   content: '';
   display: block;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, rgba(100,200,185,0.9), rgba(142,128,176,0.9));
-  margin: 0.6rem auto 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+  margin: 1rem auto 0;
   border-radius: 2px;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
 }
 
 /* ============================================================
@@ -358,13 +371,14 @@ section {
   justify-content: center;
   background: radial-gradient(circle, rgba(0, 245, 255, 0.1), transparent);
   box-shadow: 
-    0 0 40px rgba(0, 245, 255, 0.1);
+    0 0 40px rgba(0, 245, 255, 0.2),
+    inset 0 0 40px rgba(0, 245, 255, 0.05);
   animation: orbitGlow 8s linear infinite;
 }
 
 @keyframes orbitGlow {
-  0%, 100% { box-shadow: 0 0 40px rgba(0, 245, 255, 0.1); }
-  50% { box-shadow: 0 0 60px rgba(0, 245, 255, 0.12); }
+  0%, 100% { box-shadow: 0 0 40px rgba(0, 245, 255, 0.2), inset 0 0 40px rgba(0, 245, 255, 0.05); }
+  50% { box-shadow: 0 0 60px rgba(0, 245, 255, 0.4), inset 0 0 40px rgba(0, 245, 255, 0.1); }
 }
 
 .profile-pic {
@@ -382,8 +396,8 @@ section {
 }
 
 .reveal-text {
-  font-size: 1.02rem;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.8;
   color: var(--text-secondary);
   opacity: 0;
   animation: fadeInUp 0.8s ease forwards;
@@ -422,7 +436,7 @@ section {
 
 .skill-card {
   background: var(--glass);
-  border: 1px solid rgba(110,122,163,0.06);
+  border: 1px solid rgba(0, 245, 255, 0.1);
   border-radius: 12px;
   padding: 2rem;
   backdrop-filter: blur(10px);
@@ -440,9 +454,9 @@ section {
 
 .skill-card:hover {
   background: var(--glass-hover);
-  border-color: rgba(110,122,163,0.12);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-  transform: translateY(-6px);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 30px rgba(0, 245, 255, 0.2), inset 0 0 20px rgba(0, 245, 255, 0.05);
+  transform: translateY(-8px);
 }
 
 .skill-icon {
@@ -453,8 +467,8 @@ section {
 
 .skill-card h3 {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.15rem;
-  color: var(--text-primary);
+  font-size: 1.3rem;
+  color: var(--accent-cyan);
   margin-bottom: 0.5rem;
 }
 
@@ -482,7 +496,7 @@ section {
 
 .project-card {
   background: var(--glass);
-  border: 1px solid rgba(110,122,163,0.06);
+  border: 1px solid rgba(0, 245, 255, 0.1);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.5s ease;
@@ -509,9 +523,11 @@ section {
 }
 
 .project-card:hover {
-  border-color: rgba(110,122,163,0.12);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-  transform: translateY(-8px);
+  border-color: var(--accent-violet);
+  box-shadow: 
+    0 0 40px rgba(156, 74, 255, 0.3),
+    inset 0 0 30px rgba(156, 74, 255, 0.05);
+  transform: translateY(-10px);
   background: var(--glass-hover);
 }
 
@@ -529,12 +545,12 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 245, 255, 0.08) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.2) 0%, transparent 100%);
   transition: all 0.5s ease;
 }
 
 .project-card:hover .project-image::after {
-  background: linear-gradient(135deg, rgba(0, 245, 255, 0.12) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.4) 0%, transparent 100%);
 }
 
 .project-content {
@@ -543,8 +559,8 @@ section {
 
 .project-content h3 {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.15rem;
-  color: var(--text-primary);
+  font-size: 1.3rem;
+  color: var(--accent-cyan);
   margin-bottom: 0.5rem;
 }
 
@@ -563,18 +579,18 @@ section {
 }
 
 .tag {
-  background: rgba(150, 170, 180, 0.06);
-  color: var(--text-secondary);
+  background: rgba(0, 245, 255, 0.1);
+  color: var(--accent-cyan);
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
-  border: 1px solid rgba(150,170,180,0.06);
+  border: 1px solid rgba(0, 245, 255, 0.2);
   transition: all 0.3s ease;
 }
 
 .tag:hover {
-  background: rgba(0, 245, 255, 0.06);
-  box-shadow: 0 0 6px rgba(0, 245, 255, 0.06);
+  background: rgba(0, 245, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
 }
 
 .project-links {
@@ -598,8 +614,8 @@ section {
 }
 
 .link-btn:hover {
-  box-shadow: 0 0 16px rgba(0, 245, 255, 0.08);
-  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+  transform: scale(1.05);
 }
 
 /* ============================================================
@@ -637,7 +653,7 @@ section {
 .contact-info h3 {
   font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
-  color: var(--text-primary);
+  color: var(--accent-cyan);
   margin-bottom: 1rem;
 }
 
@@ -710,7 +726,7 @@ section {
 .form-group textarea {
   width: 100%;
   background: var(--glass);
-  border: 1px solid rgba(110,122,163,0.06);
+  border: 1px solid rgba(0, 245, 255, 0.1);
   border-radius: 8px;
   padding: 1rem;
   color: var(--text-primary);
@@ -728,7 +744,7 @@ section {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--accent-cyan);
-  box-shadow: 0 0 12px rgba(0, 245, 255, 0.08), inset 0 0 6px rgba(0, 245, 255, 0.02);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.2), inset 0 0 10px rgba(0, 245, 255, 0.05);
   background: var(--glass-hover);
 }
 
@@ -741,7 +757,7 @@ section {
 }
 
 .btn-rocket:hover {
-  box-shadow: 0 0 20px rgba(90, 247, 176, 0.12);
+  box-shadow: 0 0 40px rgba(90, 247, 176, 0.5), 0 0 60px rgba(0, 245, 255, 0.3);
   transform: translateY(-3px);
 }
 
@@ -773,7 +789,7 @@ section {
   text-align: center;
   padding: 2rem;
   color: var(--text-secondary);
-  border-top: 1px solid rgba(0, 245, 255, 0.06);
+  border-top: 1px solid rgba(0, 245, 255, 0.1);
   background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
 }
 
