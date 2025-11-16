@@ -1,53 +1,52 @@
-/* Shared styles for portfolio */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* Dark, space-themed styles + animations */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap');
 
 :root{
-  --accent:#0057b7;
-  --bg1: #a1c4fd;
-  --bg2: #c2e9fb;
-  --card-bg: #ffffff;
+  --bg:#0b1220;
+  --bg-deep:#02040a;
+  --accent:#7bdff6;
+  --muted:#9aa7b2;
+  --glass: rgba(255,255,255,0.03);
 }
 
 *{box-sizing:border-box}
-body{
-  font-family: 'Poppins', sans-serif;
-  margin:0;
-  background: linear-gradient(135deg,var(--bg1),var(--bg2));
-  color:#222;
-}
+html,body{height:100%}
+body{margin:0;font-family:'Inter',system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:var(--accent);background:var(--bg);overflow:hidden}
 
-.site-header{
-  text-align:center;
-  padding:3rem 1rem 1rem;
-}
-.site-header .profile-pic{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  object-fit:cover;
-  border:4px solid var(--accent);
-}
+#starfield{position:fixed;left:0;top:0;width:100%;height:100%;z-index:0}
 
-.site-header h1{margin:.6rem 0 0; color:var(--accent)}
-.subtitle{color:#444; margin:0.2rem 0 1rem}
-.nav a{margin:0 .6rem; color:#034f9a; text-decoration:none; font-weight:600}
+#universe{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+.ui-header{text-align:center;margin-bottom:1.2rem}
+.ui-header .title{font-family:'Space Grotesk',sans-serif;font-size:2rem;color:var(--accent);font-weight:700}
+.ui-header .subtitle{color:var(--muted);font-size:.95rem;margin-top:.2rem}
 
-.container{max-width:900px; margin:1rem auto; background:var(--card-bg); padding:2rem; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.planets{position:relative;width:100%;height:60vh;max-width:1200px}
+.planet{position:absolute;cursor:pointer;transform:translate(-50%,-50%);transition:transform .25s ease, box-shadow .2s ease}
+.planet-core{width:var(--size);height:var(--size);border-radius:50%;background:linear-gradient(145deg, rgba(255,255,255,0.04), rgba(0,0,0,0.2));display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--accent);backdrop-filter: blur(6px);box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+.planet-label{margin-top:.6rem;text-align:center;color:var(--muted);font-size:.9rem}
+.planet:hover{transform:translate(-50%,-50%) scale(1.08)}
 
-section{margin-bottom:1.2rem}
-section h2{margin:0 0 .6rem; color:var(--accent)}
+.ui-footer{color:var(--muted);margin-top:1.2rem}
 
-.projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem}
-.project-card{padding:1rem; border-radius:10px; background:linear-gradient(180deg,#fff,#f9fbff); box-shadow:0 6px 18px rgba(0,0,0,0.04)}
-.project-links a{color:var(--accent); text-decoration:none}
+/* Page enter/exit animations for content pages */
+.page-enter{opacity:0;transform:translateX(30px)}
+.page-enter-active{opacity:1;transform:translateX(0);transition:all .55s cubic-bezier(.2,.9,.2,1)}
+.page-exit{opacity:1;transform:translateX(0)}
+.page-exit-active{opacity:0;transform:translateX(-30px);transition:all .45s ease}
 
-.site-footer{text-align:center; padding:1rem; color:#666}
+/* Content container for individual pages */
+.content{max-width:900px;margin:4rem auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:2rem;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.6);color:var(--accent)}
+.content h1{font-family:'Space Grotesk',sans-serif;color:#fff;margin-top:0}
+.content p{color:var(--muted)}
 
-.profile-pic{width:120px;height:120px;border-radius:50%;object-fit:cover}
+/* Project cards */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.project-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:1rem;border-radius:10px}
 
-.link-cta{display:inline-block;margin-top:0.8rem;padding:0.45rem 0.9rem;background:var(--accent);color:#fff;border-radius:999px;text-decoration:none;font-weight:600}
+/* Utility */
+.back-link{display:inline-block;margin-top:1rem;color:var(--accent);text-decoration:none}
 
-@media (max-width:600px){
-  .container{margin:0.6rem}
-  .site-header{padding:2rem 1rem}
+@media (max-width:700px){
+  .planets{height:55vh}
+  .ui-header .title{font-size:1.6rem}
 }

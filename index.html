@@ -1,76 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adarsh Patil | Portfolio</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-      margin: 0;
-      padding: 0;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adarsh Patil — Universe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="dark">
+    <canvas id="starfield"></canvas>
 
-    .container {
-      background: white;
-      padding: 2rem 3rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 400px;
-    }
+    <main id="universe">
+      <header class="ui-header">
+        <div class="title">Adarsh Patil</div>
+        <div class="subtitle">B.Tech (FY) • CSE - AIML</div>
+      </header>
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: #0057b7;
-    }
+      <section class="planets" id="planets">
+        <!-- Planets are clickable elements representing pages -->
+        <div class="planet" data-target="portfolio.html" style="--size:120px; --x:25%; --y:40%;"> 
+          <div class="planet-core">About</div>
+          <div class="planet-label">Terra (About)</div>
+        </div>
 
-    h2 {
-      font-size: 1.2rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
+        <div class="planet" data-target="projects.html" style="--size:110px; --x:60%; --y:28%;">
+          <div class="planet-core">Projects</div>
+          <div class="planet-label">Astra (Projects)</div>
+        </div>
 
-    p {
-      font-size: 1rem;
-      margin: 0.3rem 0;
-    }
+        <div class="planet" data-target="education.html" style="--size:90px; --x:78%; --y:62%;">
+          <div class="planet-core">Education</div>
+          <div class="planet-label">Lumen (Education)</div>
+        </div>
 
-    footer {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
+        <div class="planet" data-target="contact.html" style="--Size:100px; --size:100px; --x:36%; --y:72%;">
+          <div class="planet-core">Contact</div>
+          <div class="planet-label">Echo (Contact)</div>
+        </div>
+      </section>
 
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1rem;
-      border: 3px solid #0057b7;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <img src="images/Screenshot 2025-10-03 195741.png" alt="Adarsh Patil" class="profile-pic">
-    <h1>Adarsh Patil</h1>
-    <h2>B.Tech (FY) | CSE - AIML</h2>
-    <p><strong>From:</strong> Maharashtra, India</p>
-    <p><a class="link-cta" href="portfolio.html">View Full Portfolio</a></p>
+      <footer class="ui-footer">Click a planet to open that page — enjoy the transitions ✨</footer>
+    </main>
 
-    <footer>
-      <p>Designed by Adarsh Patil</p>
-    </footer>
-  </div>
-</body>
+    <script src="scripts.js"></script>
+  </body>
 </html>
