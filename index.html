@@ -1,55 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adarsh Patil — Universe</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body class="dark">
-    <canvas id="starfield"></canvas>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adarsh Patil — Cosmic Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cosmic.css" />
+</head>
+<body>
+  <canvas id="cosmos"></canvas>
+  
+  <nav class="nav-bar">
+    <div class="nav-brand">Adarsh</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <main id="universe">
-      <header class="ui-header">
-        <div class="title">Adarsh Patil</div>
-        <div class="subtitle">B.Tech (FY) • CSE - AIML</div>
-      </header>
-
-      <section class="planets" id="planets">
-        <!-- Planets are clickable elements representing pages -->
-        <div class="planet" data-target="portfolio.html" style="--size:120px; --x:25%; --y:40%;"> 
-          <div class="planet-core">
-            <img class="planet-icon" src="images/planet-terra.jpg" alt="Terra">
-          </div>
-          <div class="planet-label">Terra (About)</div>
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero">
+    <div class="stars-bg"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Adarsh Patil</h1>
+        <p class="hero-subtitle">B.Tech (FY) • CSE - AIML Specialist</p>
+        <p class="hero-desc">Crafting intelligent solutions through machine learning & creative web experiences</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Explore Projects</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
         </div>
+      </div>
+      <div class="hero-planets">
+        <div class="planet-float planet-1" style="background: url('images/planet-terra.jpg'); background-size: cover;"></div>
+        <div class="planet-float planet-2" style="background: url('images/planet-astra.jpg'); background-size: cover;"></div>
+        <div class="planet-float planet-3" style="background: url('images/planet-lumen.jpg'); background-size: cover;"></div>
+      </div>
+    </div>
+  </section>
 
-        <div class="planet" data-target="projects.html" style="--size:110px; --x:60%; --y:28%;">
-          <div class="planet-core">
-            <img class="planet-icon" src="images/planet-astra.jpg" alt="Astra">
-          </div>
-          <div class="planet-label">Astra (Projects)</div>
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <div class="section-title reveal">
+      <h2>About Me</h2>
+    </div>
+    <div class="about-container reveal">
+      <div class="about-image">
+        <div class="profile-ring">
+          <img src="images/Screenshot 2025-10-03 195741.png" alt="Adarsh Patil" class="profile-pic">
         </div>
+      </div>
+      <div class="about-text">
+        <p class="reveal-text">I'm a first-year B.Tech student in Computer Science with a specialization in AIML. Based in Maharashtra, India, I'm passionate about building intelligent systems and creating beautiful digital experiences.</p>
+        <p class="reveal-text">My journey in tech started with curiosity about how machines learn. Today, I blend machine learning expertise with web development to create solutions that are both smart and intuitive.</p>
+        <p class="reveal-text">I love exploring emerging technologies, participating in hackathons, and contributing to open-source projects.</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="planet" data-target="education.html" style="--size:90px; --x:78%; --y:62%;">
-          <div class="planet-core">
-            <img class="planet-icon" src="images/planet-lumen.jpg" alt="Lumen">
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="skills">
+    <div class="section-title reveal">
+      <h2>Skills & Expertise</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <h3>Machine Learning</h3>
+        <p>Python • TensorFlow • Scikit-learn • Data Analysis</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">💻</div>
+        <h3>Web Development</h3>
+        <p>HTML • CSS • JavaScript • React • Node.js</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🧠</div>
+        <h3>Deep Learning</h3>
+        <p>Neural Networks • CNNs • NLP • Model Optimization</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <h3>Data Science</h3>
+        <p>Pandas • NumPy • Matplotlib • Statistical Analysis</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Figma • Design Systems • User Experience • Prototyping</p>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🚀</div>
+        <h3>Deployment</h3>
+        <p>Docker • AWS • Git • CI/CD • Linux</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="projects">
+    <div class="section-title reveal">
+      <h2>Featured Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+        <div class="project-content">
+          <h3>AI Chatbot Assistant</h3>
+          <p>A conversational AI built with NLP techniques to provide intelligent responses and learn from interactions.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">NLP</span>
+            <span class="tag">TensorFlow</span>
           </div>
-          <div class="planet-label">Lumen (Education)</div>
-        </div>
-
-        <div class="planet" data-target="contact.html" style="--size:100px; --x:36%; --y:72%;">
-          <div class="planet-core">
-            <img class="planet-icon" src="images/planet-echo.jpg" alt="Echo">
+          <div class="project-links">
+            <a href="#" class="link-btn">View Code</a>
+            <a href="#" class="link-btn">Live Demo</a>
           </div>
-          <div class="planet-label">Echo (Contact)</div>
         </div>
-      </section>
+      </div>
 
-      <footer class="ui-footer">Click a planet to open that page — enjoy the transitions ✨</footer>
-    </main>
+      <div class="project-card reveal">
+        <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+        <div class="project-content">
+          <h3>Image Recognition System</h3>
+          <p>Deep learning model trained to classify and recognize objects in images with 95%+ accuracy.</p>
+          <div class="project-tags">
+            <span class="tag">Deep Learning</span>
+            <span class="tag">CNN</span>
+            <span class="tag">OpenCV</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="link-btn">View Code</a>
+            <a href="#" class="link-btn">Live Demo</a>
+          </div>
+        </div>
+      </div>
 
-    <script src="scripts.js"></script>
-  </body>
+      <div class="project-card reveal">
+        <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+        <div class="project-content">
+          <h3>Personal Portfolio Website</h3>
+          <p>Modern, responsive portfolio featuring smooth animations, parallax effects, and glass morphism design.</p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">Animation</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="link-btn">View Code</a>
+            <a href="#" class="link-btn">Live Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+        <div class="project-content">
+          <h3>Predictive Analytics Dashboard</h3>
+          <p>Real-time data visualization dashboard with ML-powered predictions and trend analysis.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">D3.js</span>
+            <span class="tag">Node.js</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="link-btn">View Code</a>
+            <a href="#" class="link-btn">Live Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+        <div class="project-content">
+          <h3>Sentiment Analysis Tool</h3>
+          <p>NLP tool analyzing sentiment from text data with real-time processing and visual feedback.</p>
+          <div class="project-tags">
+            <span class="tag">NLP</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Scikit-learn</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="link-btn">View Code</a>
+            <a href="#" class="link-btn">Live Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+        <div class="project-content">
+          <h3>Recommendation Engine</h3>
+          <p>Collaborative filtering algorithm providing personalized content recommendations based on user behavior.</p>
+          <div class="project-tags">
+            <span class="tag">ML</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Algorithms</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="link-btn">View Code</a>
+            <a href="#" class="link-btn">Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <div class="section-title reveal">
+      <h2>Connect With Me</h2>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info reveal">
+        <h3>Let's Build Something Amazing</h3>
+        <p>I'm always open to collaborating on exciting projects and discussing new opportunities in tech.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="icon">📧</span>
+            <div>
+              <p class="label">Email</p>
+              <a href="mailto:adarsh.patil@example.com">adarsh.patil@example.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="icon">💼</span>
+            <div>
+              <p class="label">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/adarsh-patil-409465383" target="_blank" rel="noopener">adarsh-patil-409465383</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="icon">💻</span>
+            <div>
+              <p class="label">GitHub</p>
+              <a href="https://github.com" target="_blank" rel="noopener">github.com/adarshpatil</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form reveal">
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" required>
+          <span class="glow"></span>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Your Email" required>
+          <span class="glow"></span>
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Your Message" rows="5" required></textarea>
+          <span class="glow"></span>
+        </div>
+        <button type="submit" class="btn btn-rocket">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 Adarsh Patil. Crafted with ✨ and deployed to the cosmic web.</p>
+  </footer>
+
+  <script src="cosmic.js"></script>
+</body>
 </html>
