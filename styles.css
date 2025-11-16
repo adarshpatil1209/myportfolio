@@ -73,3 +73,42 @@ body{margin:0;font-family:'Inter',system-ui, -apple-system, 'Segoe UI', Roboto, 
 
 /* stronger AMOLED blacks */
 body{background:linear-gradient(180deg,var(--bg),#000 70%)}
+
+/* soft galaxy backdrop layers */
+body::before{
+  content:'';
+  position:fixed;left:-20%;top:-30%;width:140%;height:140%;
+  background: radial-gradient(ellipse at 20% 20%, rgba(123,223,246,0.08) 0%, transparent 20%),
+              radial-gradient(ellipse at 80% 70%, rgba(255,105,180,0.06) 0%, transparent 18%),
+              radial-gradient(ellipse at 55% 30%, rgba(140,100,255,0.05) 0%, transparent 25%);
+  filter: blur(60px) saturate(130%);
+  z-index:1;pointer-events:none;mix-blend-mode:screen;
+}
+
+/* deeper nebula layer */
+body::after{
+  content:'';
+  position:fixed;right:-10%;bottom:-10%;width:80%;height:80%;
+  background: radial-gradient(circle at 60% 40%, rgba(0,180,200,0.06) 0%, rgba(120,60,255,0.03) 8%, transparent 40%);
+  filter: blur(90px) contrast(110%);
+  z-index:1;pointer-events:none;mix-blend-mode:screen;
+}
+
+/* subtle slow rotation */
+@keyframes slow-rotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.planet .planet-core img{animation:slow-rotate 80s linear infinite}
+
+/* aura around planet */
+.planet-core::before{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;
+  width:calc(var(--size) * 1.8);height:calc(var(--size) * 1.8);border-radius:50%;
+  background:radial-gradient(circle, rgba(123,223,246,0.10) 0%, rgba(123,223,246,0.04) 12%, transparent 35%);
+  filter:blur(18px) saturate(140%);
+  z-index:-1;mix-blend-mode:screen;opacity:0.95;transition:opacity .4s ease
+}
+.planet:hover .planet-core::before{opacity:1}
+
+/* particle emitted from planets */
+.planet-particle{position:absolute;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,0.95), rgba(123,223,246,0.8));pointer-events:none;box-shadow:0 6px 20px rgba(123,223,246,0.12)}
+@keyframes particle-fly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0.4);opacity:0}}
+

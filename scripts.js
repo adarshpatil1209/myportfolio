@@ -100,6 +100,41 @@
     });
   }
 
+  // particle emitters for each planet to create aura/particles
+  function startPlanetEmitters(){
+    const planets = document.querySelectorAll('.planet');
+    planets.forEach(p=>{
+      // small emitter interval
+      const interval = Math.random()*900 + 500;
+      setInterval(()=>{
+        emitParticle(p);
+      }, interval);
+    });
+  }
+
+  function emitParticle(planet){
+    const rect = planet.getBoundingClientRect();
+    const core = planet.querySelector('.planet-core');
+    const centerX = rect.left + rect.width/2;
+    const centerY = rect.top + rect.height/2;
+    const particle = document.createElement('div');
+    particle.className = 'planet-particle';
+    document.body.appendChild(particle);
+    // random direction and distance
+    const angle = Math.random()*Math.PI*2;
+    const dist = (rect.width * 0.8) + Math.random()*80;
+    const tx = Math.cos(angle)*dist;
+    const ty = Math.sin(angle)*dist;
+    particle.style.left = (centerX - 3) + 'px';
+    particle.style.top = (centerY - 3) + 'px';
+    particle.style.setProperty('--tx', tx + 'px');
+    particle.style.setProperty('--ty', ty + 'px');
+    const dur = Math.random()*700 + 900;
+    particle.style.animation = `particle-fly ${dur}ms cubic-bezier(.2,.9,.2,1)`;
+    // remove after animation
+    particle.addEventListener('animationend', ()=> particle.remove());
+  }
+
   // For content pages: page enter animation and intercept links for exit
   function setupPageTransitions(){
     const container = document.querySelector('.content');
@@ -132,6 +167,8 @@
     setupPageTransitions();
     // reveal elements sequentially
     revealSequentially();
+    // start emitters after DOM ready
+    startPlanetEmitters();
   });
 
   function revealSequentially(){
