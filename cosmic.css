@@ -848,3 +848,35 @@ section {
     width: 100%;
   }
 }
+
+/* Mobile landscape: keep desktop layout feel and push planets upward
+   when the device is in landscape on small screens. Positions are
+   adjusted via JS for a random, upward distribution. */
+@media (max-width: 900px) and (orientation: landscape) {
+  .hero-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-planets {
+    height: 420px;
+  }
+
+  .planet-float {
+    transition: all 0.6s ease;
+    animation-duration: 5s;
+  }
+
+  /* allow JS to set 'top' positions; remove bottom anchors so planets
+     float upward visually */
+  .planet-1,
+  .planet-2,
+  .planet-3 {
+    bottom: auto;
+  }
+}
